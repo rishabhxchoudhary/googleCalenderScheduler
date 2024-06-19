@@ -1,15 +1,26 @@
 import { google } from 'googleapis';
 
-const calendar = google.calendar({ 
-    version: "v3",
-    auth: process.env.GOOGLE_CALENDAR_API_KEY
-});
+let calendar;
+let oauth2Client;
 
-const oauth2Client = new google.auth.OAuth2(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    process.env.REDIRECT_URI
-);
+try {
+    calendar = google.calendar({ 
+        version: "v3",
+        auth: process.env.GOOGLE_CALENDAR_API_KEY
+    });
+} catch (error) {
+    console.error('Error initializing Google Calendar:', error);
+}
+
+try {
+    oauth2Client = new google.auth.OAuth2(
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        process.env.REDIRECT_URI
+    );
+} catch (error) {
+    console.error('Error initializing OAuth2 Client:', error);
+}
 
 const scopes = [
     // 'https://www.googleapis.com/auth/blogger',

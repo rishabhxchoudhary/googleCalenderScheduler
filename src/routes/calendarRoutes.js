@@ -3,8 +3,8 @@ import { listEvents, scheduleEvent, getEmptySlotsForNextWeek } from '../controll
 
 const router = express.Router();
 
-router.get("/events", listEvents);
+router.get("/events",listEvents);
 router.get("/empty_slots", getEmptySlotsForNextWeek);
-router.get("/schedule_event", scheduleEvent);
+router.get("/schedule_event",scheduleEvent);
 
 export default router;
