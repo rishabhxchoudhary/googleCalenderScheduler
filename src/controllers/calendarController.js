@@ -4,10 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const listEvents = async (req, res) => {
     try {
-        if (!req.oauth2Client.credentials) {
-            return res.status(401).send("Not authenticated");
-        }
-
         calendar.events.list({
             calendarId: 'primary',
             auth: req.oauth2Client,
@@ -30,9 +26,6 @@ export const listEvents = async (req, res) => {
 
 export const getEmptySlotsForNextWeek = async (req, res) => {
     try {
-        if (!req.oauth2Client.credentials) {
-            return res.status(401).send("Not authenticated");
-        }
         const emptySlots = await getEmptySlots(req.oauth2Client);
         res.send(emptySlots);
     } catch (error) {
@@ -43,9 +36,6 @@ export const getEmptySlotsForNextWeek = async (req, res) => {
 
 export const scheduleEvent = async (req, res) => {
     try {
-        if (!req.oauth2Client.credentials) {
-            return res.status(401).send("Not authenticated");
-        }
 
         const { summary, description, start, end } = req.body;
 
