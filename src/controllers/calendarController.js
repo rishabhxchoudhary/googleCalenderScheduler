@@ -23,7 +23,7 @@ export const listEvents = async (req, res) => {
     });
 };
 
-export const getEmptySlotsForNextDay = async (req, res) => {
+export const getEmptySlotsForNextWeek = async (req, res) => {
     if (!req.oauth2Client.credentials) {
         return res.status(401).send("Not authenticated");
     }

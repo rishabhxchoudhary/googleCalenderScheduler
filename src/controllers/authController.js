@@ -11,7 +11,6 @@ export const googleAuth = (req, res) => {
 export const googleAuthRedirect = async (req, res) => {
     let code = req.query.code;
     const { tokens } = await oauth2Client.getToken(code);
-    console.log(tokens);
     oauth2Client.setCredentials(tokens);
 
     res.send({
