@@ -12,6 +12,7 @@ try {
     console.error('Error initializing Google Calendar:', error);
 }
 
+console.log("Redirect URI", process.env.REDIRECT_URI)
 try {
     oauth2Client = new google.auth.OAuth2(
         process.env.CLIENT_ID,

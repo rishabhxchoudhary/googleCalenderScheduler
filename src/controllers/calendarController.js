@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { calendar } from '../config/googleConfig.js';
 import { getEmptySlots } from '../utils/timeUtils.js';
 import { v4 as uuidv4 } from 'uuid';
@@ -37,7 +38,7 @@ export const getEmptySlotsForNextWeek = async (req, res) => {
 export const scheduleEvent = async (req, res) => {
     try {
 
-        const { summary, description, start, end } = req.body;
+        console.log("In schedule event")
 
         const done = await calendar.events.insert({
             calendarId: 'primary',
@@ -51,21 +52,22 @@ export const scheduleEvent = async (req, res) => {
                 },
             },
             resource: {
-                summary: summary,
-                description: description,
+                summary: "Summary",
+                description: "Description",
                 start: {
-                    dateTime: start,
-                    timeZone: 'Asia/Dubai',
+                    dateTime: dayjs(new Date()).add(1, 'hour').toISOString(),
+                    timeZone: 'Asia/Kolkata',
                 },
                 end: {
-                    dateTime: end,
-                    timeZone: 'Asia/Dubai',
+                    dateTime:  dayjs(new Date()).add(2, 'hour').toISOString(),
+                    timeZone: 'Asia/Kolkata',
                 },
             },
         });
+        console.log("Done", done)
         res.send(done);
     } catch (error) {
         console.error('Error scheduling event:', error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send(error);
     }
 };

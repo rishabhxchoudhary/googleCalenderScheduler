@@ -17,10 +17,11 @@ export const googleAuthRedirect = async (req, res) => {
     try {
         let code = req.query.code;
         const { tokens } = await oauth2Client.getToken(code);
+        console.log(tokens)
         oauth2Client.setCredentials(tokens);
 
         res.send({
-            msg: "You have successfully authenticated",
+            tokens
         });
     } catch (error) {
         console.error('Error during authentication redirect:', error);
